@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle } from 'lucide-react'
+import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords } from 'lucide-react'
 import { useTheme } from '@/context/ThemeContext'
 
 const FEATURES = [
@@ -15,9 +15,9 @@ const FEATURES = [
     description: 'Volunteer middlemen who facilitate trades so both sides stay safe. Apply to become a courier and earn Influence for successful deliveries.',
   },
   {
-    icon: Scale,
-    title: 'Adjudicator Dashboard',
-    description: 'Community-driven dispute resolution. Experienced members review trade conflicts and keep the marketplace fair.',
+    icon: Swords,
+    title: 'Squad Up',
+    description: 'Find teammates instantly. Create a squad call for any game, set your party size, share your gamertag, and fill open slots before the timer runs out.',
   },
   {
     icon: Vote,
@@ -158,6 +158,7 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
   const [platform, setPlatform] = useState<'apple' | 'android' | null>(null)
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   function handleClose() {
@@ -166,11 +167,12 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
       setPlatform(null)
       setEmail('')
       setSubmitted(false)
+      setLoading(false)
       setError('')
     }, 200)
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
 
@@ -190,7 +192,24 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
       return
     }
 
-    setSubmitted(true)
+    setLoading(true)
+    try {
+      const res = await fetch('/api/early-access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim(), platform }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || 'Something went wrong. Please try again.')
+        return
+      }
+      setSubmitted(true)
+    } catch {
+      setError('Network error. Please try again.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   if (!open) return null
@@ -307,9 +326,9 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
               <button
                 type="submit"
                 className="w-full px-6 py-2.5 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={!platform || !email.trim()}
+                disabled={!platform || !email.trim() || loading}
               >
-                Request Early Access
+                {loading ? 'Submitting...' : 'Request Early Access'}
               </button>
 
               <p className="text-xs text-center text-muted-foreground">
@@ -324,10 +343,13 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
 }
 
 const SCREENSHOTS = [
+  { light: '/light-squad-feed.png', dark: '/dark-squad-feed.png', alt: 'Rally Squad Up feed with open party slots' },
+  { light: '/light-home.png', dark: '/dark-home.png', alt: 'Rally home with active squads and hot topics' },
+  { light: '/light-profile.png', dark: '/dark-profile.png', alt: 'Rally profile with gamertags, influence score, and level' },
+  { light: '/light-squad-create.png', dark: '/dark-squad-create.png', alt: 'Create a Squad Up call with game selection and gamertag' },
   { light: '/light-feed.png', dark: '/dark-feed.png', alt: 'Rally home feed with polls and hot topics' },
   { light: '/light-trade.png', dark: '/dark-trade.png', alt: 'Rally Game Trade marketplace with item listings' },
   { light: '/light-notifications.png', dark: '/dark-notifications.png', alt: 'Rally notifications with trade completions and courier requests' },
-  { light: '/light-profile.png', dark: '/dark-profile.png', alt: 'Rally profile with flairs, influence score, and level' },
 ]
 
 export default function LandingPage() {
@@ -386,22 +408,22 @@ export default function LandingPage() {
         </p>
       </section>
 
-      {/* App Screenshots */}
+      {/* App Screenshots — infinite marquee */}
       <section className="bg-surface-alt py-16 overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center text-foreground mb-10">
-            See Rally in action
-          </h2>
-          <div className="flex justify-center gap-4 sm:gap-6 overflow-x-auto pb-4">
-            {SCREENSHOTS.map((screenshot) => (
-              <img
-                key={screenshot.alt}
-                src={isDark ? screenshot.dark : screenshot.light}
-                alt={screenshot.alt}
-                className="w-48 sm:w-56 rounded-2xl shadow-2xl border border-border shrink-0"
-              />
-            ))}
-          </div>
+        <h2 className="text-2xl font-bold text-center text-foreground mb-10">
+          See Rally in action
+        </h2>
+        <div
+          className="flex w-max animate-marquee hover:[animation-play-state:paused]"
+        >
+          {[...SCREENSHOTS, ...SCREENSHOTS].map((screenshot, i) => (
+            <img
+              key={`${screenshot.alt}-${i}`}
+              src={isDark ? screenshot.dark : screenshot.light}
+              alt={screenshot.alt}
+              className="w-48 sm:w-56 rounded-2xl shadow-2xl border border-border shrink-0 mx-3"
+            />
+          ))}
         </div>
       </section>
 

@@ -78,7 +78,13 @@
   to { height: 0; }
 }
 
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 @theme inline {
   --animate-slideDown: slideDown 200ms ease-out;
   --animate-slideUp: slideUp 200ms ease-out;
+  --animate-marquee: marquee 30s linear infinite;
 }
