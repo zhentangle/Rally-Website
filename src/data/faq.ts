@@ -277,7 +277,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'what_is_rally',
     question: "What is Rally?",
-    answer: "Rally is a social prediction app where you vote on future events and earn XP when you're right! Make predictions on stocks, sports, tech, and more. Compete with friends and climb the leaderboard!",
+    answer: "Rally is the social app for gamers. Trade in-game items through our secure marketplace, predict real-world outcomes, earn XP, and compete with friends on the leaderboard!",
     category: 'general',
   },
   {
