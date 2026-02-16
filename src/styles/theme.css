@@ -1,16 +1,36 @@
 :root {
   --background: #ffffff;
-  --foreground: #111827;
-  --primary: #030213;
+  --foreground: #000000;
+  --primary: #000000;
   --primary-foreground: #ffffff;
+  --surface: #f9fafb;
+  --surface-alt: #f3f4f6;
   --muted: #f3f4f6;
-  --muted-foreground: #6b7280;
+  --muted-foreground: rgba(0,0,0,0.7);
   --accent: #ec4899;
   --accent-foreground: #ffffff;
-  --border: #e5e7eb;
+  --border: rgba(0,0,0,0.1);
   --card: #ffffff;
-  --card-foreground: #111827;
+  --card-foreground: #000000;
+  --overlay: rgba(0,0,0,0.05);
   --radius: 0.625rem;
+}
+
+:root.dark {
+    --background: #000000;
+    --foreground: #ffffff;
+    --primary: #ffffff;
+    --primary-foreground: #000000;
+    --surface: #141419;
+    --surface-alt: #1c1c24;
+    --muted: #141419;
+    --muted-foreground: rgba(255,255,255,0.85);
+    --accent: #ec4899;
+    --accent-foreground: #ffffff;
+    --border: rgba(255,255,255,0.12);
+    --card: #18181f;
+    --card-foreground: #ffffff;
+    --overlay: rgba(255,255,255,0.05);
 }
 
 @theme inline {
@@ -18,6 +38,8 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
@@ -25,6 +47,7 @@
   --color-border: var(--border);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-overlay: var(--overlay);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

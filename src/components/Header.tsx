@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Moon, Sun } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTheme } from '@/context/ThemeContext'
 
 const NAV_LINKS = [
   { to: '/faq', label: 'FAQ' },
@@ -13,12 +14,13 @@ const NAV_LINKS = [
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { pathname } = useLocation()
+  const { isDark, toggleTheme } = useTheme()
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
+    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2" onClick={() => setMenuOpen(false)}>
-          <img src="/logo.png" alt="Rally" className="h-8 w-8 rounded-lg" />
+          <img src={isDark ? '/logo-dark.png' : '/logo.png'} alt="Rally" className="h-8 w-8 rounded-lg" />
           <span className="font-semibold text-lg text-primary">Rally</span>
         </Link>
 
@@ -35,19 +37,35 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-overlay transition-colors"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
         </nav>
 
-        <button
-          className="md:hidden p-2 text-muted-foreground hover:text-foreground"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-overlay transition-colors"
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button
+            className="p-2 text-muted-foreground hover:text-foreground"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {menuOpen && (
-        <div className="md:hidden border-t border-border bg-white">
+        <div className="md:hidden border-t border-border bg-background">
           <nav className="flex flex-col px-4 py-3 gap-1">
             {NAV_LINKS.map((link) => (
               <Link

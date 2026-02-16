@@ -1,17 +1,20 @@
 import { Link } from 'react-router-dom'
+import { useTheme } from '@/context/ThemeContext'
 
 export default function Footer() {
+  const { isDark } = useTheme()
+
   return (
     <footer className="border-t border-border bg-muted/50">
       <div className="max-w-5xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
             <Link to="/" className="flex items-center gap-2 mb-3">
-              <img src="/logo.png" alt="Rally" className="h-7 w-7 rounded-lg" />
+              <img src={isDark ? '/logo-dark.png' : '/logo.png'} alt="Rally" className="h-7 w-7 rounded-lg" />
               <span className="font-semibold text-primary">Rally</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              The social prediction app where your voice matters.
+              The social app built for gamers.
             </p>
           </div>
 

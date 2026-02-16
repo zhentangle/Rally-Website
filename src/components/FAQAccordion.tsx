@@ -13,7 +13,7 @@ export default function FAQAccordion({ items }: FAQAccordionProps) {
         <Accordion.Item
           key={item.id}
           value={item.id}
-          className="border border-border rounded-lg overflow-hidden bg-white"
+          className="border border-border rounded-lg overflow-hidden bg-card"
         >
           <Accordion.Trigger className="flex items-center justify-between w-full px-5 py-4 text-left text-sm font-medium text-foreground hover:bg-muted/50 transition-colors group cursor-pointer">
             <span>{item.question}</span>
