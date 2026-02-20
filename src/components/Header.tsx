@@ -66,23 +66,26 @@ export default function Header() {
               Legal
               <ChevronDown size={14} className={cn('transition-transform', legalOpen && 'rotate-180')} />
             </button>
-            {legalOpen && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-40 rounded-lg border border-border bg-background shadow-lg py-1">
-                {LEGAL_LINKS.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setLegalOpen(false)}
-                    className={cn(
-                      'block px-4 py-2 text-sm font-medium transition-colors hover:bg-muted',
-                      pathname === link.to ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div className={cn(
+              'absolute top-full left-1/2 -translate-x-1/2 mt-2 w-40 rounded-lg border border-border bg-background shadow-lg py-1 transition-all duration-150 origin-top',
+              legalOpen
+                ? 'opacity-100 scale-100 pointer-events-auto'
+                : 'opacity-0 scale-95 pointer-events-none'
+            )}>
+              {LEGAL_LINKS.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setLegalOpen(false)}
+                  className={cn(
+                    'block px-4 py-2 text-sm font-medium transition-colors hover:bg-muted',
+                    pathname === link.to ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
           <button
             onClick={toggleTheme}
@@ -111,9 +114,11 @@ export default function Header() {
         </div>
       </div>
 
-      {menuOpen && (
-        <div className="md:hidden border-t border-border bg-background">
-          <nav className="flex flex-col px-4 py-3 gap-1">
+      <div className={cn(
+        'md:hidden absolute left-0 right-0 top-full border-t bg-background overflow-hidden transition-all duration-200 shadow-lg',
+        menuOpen ? 'max-h-96 opacity-100 border-border' : 'max-h-0 opacity-0 border-transparent'
+      )}>
+        <nav className="flex flex-col px-4 py-3 gap-1">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.to}
@@ -141,28 +146,28 @@ export default function Header() {
               Legal
               <ChevronDown size={14} className={cn('transition-transform', mobileLegalOpen && 'rotate-180')} />
             </button>
-            {mobileLegalOpen && (
-              <div className="flex flex-col gap-1 pl-4">
-                {LEGAL_LINKS.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => { setMenuOpen(false); setMobileLegalOpen(false) }}
-                    className={cn(
-                      'py-2 px-3 rounded-lg text-sm font-medium transition-colors',
-                      pathname === link.to
-                        ? 'bg-muted text-accent'
-                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div className={cn(
+              'flex flex-col gap-1 pl-4 overflow-hidden transition-all duration-150',
+              mobileLegalOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+            )}>
+              {LEGAL_LINKS.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => { setMenuOpen(false); setMobileLegalOpen(false) }}
+                  className={cn(
+                    'py-2 px-3 rounded-lg text-sm font-medium transition-colors',
+                    pathname === link.to
+                      ? 'bg-muted text-accent'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </nav>
         </div>
-      )}
     </header>
   )
 }

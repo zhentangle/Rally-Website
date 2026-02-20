@@ -55,9 +55,14 @@
 }
 
 @layer base {
+  @media (hover: hover) and (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
   * {
     @apply border-border;
-    cursor: none !important;
   }
 
   body {
@@ -175,6 +180,15 @@
   66% { color: #54a0ff; }
   83% { color: #5f27cd; }
   100% { color: #ff6b6b; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @theme inline {

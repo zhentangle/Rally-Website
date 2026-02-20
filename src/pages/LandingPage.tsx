@@ -2,9 +2,10 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords, EyeOff } from 'lucide-react'
 import { useTheme } from '@/context/ThemeContext'
+import { useAnimatedPresence } from '@/hooks/useAnimatedPresence'
 
 // Flip to false to remove Riot integration screenshots from the marquee (API compliance)
-const SHOW_RIOT = true
+const SHOW_RIOT = false
 
 const FEATURES = [
   {
@@ -65,13 +66,13 @@ const FEATURES = [
   },
 ]
 
-function HowTradingWorksModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  if (!open) return null
+function HowTradingWorksModal({ mounted, visible, onClose }: { mounted: boolean; visible: boolean; onClose: () => void }) {
+  if (!mounted) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-card text-card-foreground rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-border">
+      <div className={`absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`} onClick={onClose} />
+      <div className={`relative bg-card text-card-foreground rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-border transition-all duration-200 ${visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}>
         {/* Header */}
         <div className="sticky top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
           <div className="flex items-center gap-3">
@@ -173,7 +174,7 @@ function HowTradingWorksModal({ open, onClose }: { open: boolean; onClose: () =>
   )
 }
 
-function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+function GetInTouchModal({ mounted, visible, onClose }: { mounted: boolean; visible: boolean; onClose: () => void }) {
   const [platform, setPlatform] = useState<'apple' | 'android' | null>(null)
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -188,7 +189,7 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
       setSubmitted(false)
       setLoading(false)
       setError('')
-    }, 200)
+    }, 250)
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -231,12 +232,12 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
     }
   }
 
-  if (!open) return null
+  if (!mounted) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={handleClose} />
-      <div className="relative bg-card text-card-foreground rounded-2xl max-w-md w-full shadow-2xl border border-border">
+      <div className={`absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`} onClick={handleClose} />
+      <div className={`relative bg-card text-card-foreground rounded-2xl max-w-md w-full shadow-2xl border border-border transition-all duration-200 ${visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}>
         {/* Header */}
         <div className="border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
           <div className="flex items-center gap-3">
@@ -361,15 +362,15 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
   )
 }
 
-function GamertagPrivacyModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+function GamertagPrivacyModal({ mounted, visible, onClose }: { mounted: boolean; visible: boolean; onClose: () => void }) {
   const { isDark } = useTheme()
 
-  if (!open) return null
+  if (!mounted) return null
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-card text-card-foreground rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-border">
+      <div className={`absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`} onClick={onClose} />
+      <div className={`relative bg-card text-card-foreground rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-border transition-all duration-200 ${visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}>
         {/* Header */}
         <div className="sticky top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
           <div className="flex items-center gap-3">
@@ -476,17 +477,17 @@ const ALL_SCREENSHOTS = [
   { light: '/light-feed.png', dark: '/dark-feed.png', alt: 'Rally home feed with polls and hot topics' },
   { light: '/light-trade.png', dark: '/dark-trade.png', alt: 'Rally Game Trade marketplace with gamertag privacy' },
   { light: '/light-notifications.png', dark: '/dark-notifications.png', alt: 'Rally notifications with trade completions and courier requests' },
+  { light: '/light-login.png', dark: '/dark-login.png', alt: 'Rally login screen with Apple, Google, and Steam sign-in options' },
 ]
 
 const SCREENSHOTS = SHOW_RIOT ? ALL_SCREENSHOTS : ALL_SCREENSHOTS.filter(s => !s.riot)
 
 export default function LandingPage() {
-  const [tradingModalOpen, setTradingModalOpen] = useState(false)
-  const [privacyModalOpen, setPrivacyModalOpen] = useState(false)
-  const [getInTouchOpen, setGetInTouchOpen] = useState(false)
-  const [featureScreenshot, setFeatureScreenshot] = useState<{ src: string; title: string } | null>(null)
-  const [lightboxVisible, setLightboxVisible] = useState(false)
-  const [lightboxClosing, setLightboxClosing] = useState(false)
+  const tradingModal = useAnimatedPresence(200)
+  const privacyModal = useAnimatedPresence(200)
+  const getInTouchModal = useAnimatedPresence(200)
+  const lightbox = useAnimatedPresence(300)
+  const [lightboxData, setLightboxData] = useState<{ src: string; title: string } | null>(null)
   const { isDark } = useTheme()
 
   // Magnifier state
@@ -504,6 +505,8 @@ export default function LandingPage() {
   const ZOOM = 2.5
 
   const handleMarqueeMouseDown = useCallback((e: React.MouseEvent<HTMLImageElement>) => {
+    // Disable magnifier on touch devices
+    if (window.matchMedia('(pointer: coarse)').matches) return
     e.preventDefault()
     const img = e.currentTarget
     const rect = img.getBoundingClientRect()
@@ -535,27 +538,23 @@ export default function LandingPage() {
   }, [magnifier?.active])
 
   const openLightbox = useCallback((src: string, title: string) => {
-    setFeatureScreenshot({ src, title })
-    requestAnimationFrame(() => setLightboxVisible(true))
-  }, [])
+    setLightboxData({ src, title })
+    lightbox.open()
+  }, [lightbox])
 
   const closeLightbox = useCallback(() => {
-    setLightboxClosing(true)
-    setLightboxVisible(false)
-    setTimeout(() => {
-      setFeatureScreenshot(null)
-      setLightboxClosing(false)
-    }, 300)
-  }, [])
+    lightbox.close()
+    setTimeout(() => setLightboxData(null), 350)
+  }, [lightbox])
 
   useEffect(() => {
-    if (!featureScreenshot) return
+    if (!lightbox.mounted) return
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeLightbox()
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
-  }, [featureScreenshot, closeLightbox])
+  }, [lightbox.mounted, closeLightbox])
 
   return (
     <div>
@@ -602,7 +601,7 @@ export default function LandingPage() {
 
         <p className="text-sm text-muted-foreground">
           Want early access?{' '}
-          <button onClick={() => setGetInTouchOpen(true)} className="text-accent hover:underline font-medium">
+          <button onClick={getInTouchModal.open} className="text-accent hover:underline font-medium">
             Get in touch
           </button>
         </p>
@@ -701,10 +700,10 @@ export default function LandingPage() {
             </div>
             <div className="shrink-0 self-center">
               <button
-                onClick={() => setTradingModalOpen(true)}
+                onClick={tradingModal.open}
                 className="px-5 py-2.5 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
               >
-                How trading works
+                How it works
               </button>
             </div>
           </div>
@@ -725,7 +724,7 @@ export default function LandingPage() {
             </div>
             <div className="shrink-0 self-center">
               <button
-                onClick={() => setPrivacyModalOpen(true)}
+                onClick={privacyModal.open}
                 className="px-5 py-2.5 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
               >
                 How it works
@@ -735,9 +734,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <HowTradingWorksModal open={tradingModalOpen} onClose={() => setTradingModalOpen(false)} />
-      <GamertagPrivacyModal open={privacyModalOpen} onClose={() => setPrivacyModalOpen(false)} />
-      <GetInTouchModal open={getInTouchOpen} onClose={() => setGetInTouchOpen(false)} />
+      <HowTradingWorksModal mounted={tradingModal.mounted} visible={tradingModal.visible} onClose={tradingModal.close} />
+      <GamertagPrivacyModal mounted={privacyModal.mounted} visible={privacyModal.visible} onClose={privacyModal.close} />
+      <GetInTouchModal mounted={getInTouchModal.mounted} visible={getInTouchModal.visible} onClose={getInTouchModal.close} />
 
       {/* CTA */}
       <section className="max-w-5xl mx-auto px-4 py-16 text-center">
@@ -750,7 +749,7 @@ export default function LandingPage() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
-            onClick={() => setGetInTouchOpen(true)}
+            onClick={getInTouchModal.open}
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Get Early Access
@@ -765,30 +764,29 @@ export default function LandingPage() {
       </section>
 
       {/* Feature screenshot lightbox */}
-      {(featureScreenshot || lightboxClosing) && (
+      {lightbox.mounted && (
         <div
           className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
-            lightboxVisible ? 'bg-black/80 backdrop-blur-sm' : 'bg-black/0 backdrop-blur-0'
+            lightbox.visible ? 'bg-black/80 backdrop-blur-sm' : 'bg-black/0 backdrop-blur-0'
           }`}
           onClick={closeLightbox}
         >
           <div
             className={`relative max-w-sm w-full mx-4 transition-all duration-300 ${
-              lightboxVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+              lightbox.visible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
             }`}
-            onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={closeLightbox}
-              className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+              className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors"
             >
-              <X className="w-6 h-6" />
+              <X className="w-7 h-7" />
             </button>
-            <p className="text-white text-sm font-medium text-center mb-3">{featureScreenshot?.title}</p>
+            <p className="text-white text-sm font-medium text-center mb-3">{lightboxData?.title}</p>
             <img
-              src={featureScreenshot?.src}
-              alt={featureScreenshot?.title}
+              src={lightboxData?.src}
+              alt={lightboxData?.title}
               className="w-full rounded-2xl shadow-2xl"
             />
           </div>

@@ -4,10 +4,11 @@ import { useTheme } from '@/context/ThemeContext'
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null)
   const { isDark } = useTheme()
+  const isTouch = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
 
   useEffect(() => {
     const cursor = cursorRef.current
-    if (!cursor) return
+    if (!cursor || isTouch) return
 
     let mouseX = 0
     let mouseY = 0
@@ -78,6 +79,8 @@ export default function CustomCursor() {
   }, [])
 
   const stroke = isDark ? '#ffffff' : '#000000'
+
+  if (isTouch) return null
 
   return (
     <div

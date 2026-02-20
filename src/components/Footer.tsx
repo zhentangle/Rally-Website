@@ -62,7 +62,8 @@ export default function Footer() {
             {disclaimersOpen ? 'Hide' : 'View'} additional trademark disclaimers
             <ChevronDown size={12} className={`transition-transform ${disclaimersOpen ? 'rotate-180' : ''}`} />
           </button>
-          {disclaimersOpen && (
+          <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${disclaimersOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+            <div className="overflow-hidden">
             <div className="mt-2 space-y-2">
               <p className="text-[10px] leading-relaxed text-muted-foreground/60">
                 Rally isn't endorsed by Epic Games and doesn't reflect the views or opinions of Epic Games or anyone officially involved in producing or managing Epic Games properties. Epic Games, Fortnite, and all associated properties are trademarks or registered trademarks of Epic Games, Inc.
@@ -89,7 +90,8 @@ export default function Footer() {
                 All game names, logos, and trademarks are the property of their respective owners. Rally is an independent platform and is not affiliated with, sponsored by, or endorsed by any game publisher or developer listed above. If you are a rights holder and have concerns about the use of your intellectual property, please refer to our <Link to="/terms" className="underline hover:text-muted-foreground transition-colors">Terms of Service</Link> and <Link to="/privacy" className="underline hover:text-muted-foreground transition-colors">Privacy Policy</Link>, or contact us at <a href="mailto:support@rally.ink" className="underline hover:text-muted-foreground transition-colors">support@rally.ink</a> and we will promptly address your request.
               </p>
             </div>
-          )}
+            </div>
+          </div>
         </div>
       </div>
     </footer>

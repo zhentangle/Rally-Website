@@ -16,6 +16,15 @@
     <meta name="twitter:description" content="Trade in-game items, predict real-world outcomes, earn XP, and join a community that plays as hard as you do." />
   </head>
   <body>
+    <div id="splash" style="
+      position: fixed; inset: 0; z-index: 99999;
+      display: flex; align-items: center; justify-content: center; flex-direction: column;
+      background: #000000;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    ">
+      <img src="/logo-dark.png" alt="Rally" width="64" height="64" style="border-radius: 16px; margin-bottom: 16px;" />
+      <span style="font-family: system-ui, -apple-system, sans-serif; font-weight: 600; font-size: 1.25rem; color: #ffffff;">Rally</span>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
