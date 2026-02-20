@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords } from 'lucide-react'
+import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords, EyeOff } from 'lucide-react'
 import { useTheme } from '@/context/ThemeContext'
 
 const FEATURES = [
@@ -8,41 +8,57 @@ const FEATURES = [
     icon: Repeat,
     title: 'Game Trade',
     description: 'P2P marketplace for in-game items — weapons, armor, apparel, plans. Trade with fellow gamers directly.',
+    light: '/light-trade.png',
+    dark: '/dark-trade.png',
   },
   {
     icon: Shield,
     title: 'Community Couriers',
     description: 'Volunteer middlemen who facilitate trades so both sides stay safe. Apply to become a courier and earn Influence for successful deliveries.',
+    light: '/light-notifications.png',
+    dark: '/dark-notifications.png',
   },
   {
     icon: Swords,
     title: 'Squad Up',
     description: 'Find teammates instantly. Create a squad call for any game, set your party size, share your gamertag, and fill open slots before the timer runs out.',
+    light: '/light-squad-create.png',
+    dark: '/dark-squad-create.png',
   },
   {
     icon: Vote,
     title: 'Prediction Polls',
     description: 'Vote on real-world outcomes and see how your predictions stack up against the community.',
+    light: '/light-feed.png',
+    dark: '/dark-feed.png',
   },
   {
     icon: Infinity,
     title: 'Influence',
     description: 'Your merit score, your level, and your currency — all in one. Earn Influence from trades, predictions, and streaks, then spend it on trade slots and cosmetics.',
+    light: '/light-profile.png',
+    dark: '/dark-profile.png',
   },
   {
     icon: Sparkles,
     title: 'Flairs & Feed Control',
     description: 'Customize your identity with extensive flair options. Your flairs shape what shows up in your feed so you see content that matters to you.',
+    light: '/light-home.png',
+    dark: '/dark-home.png',
   },
   {
     icon: Dices,
     title: 'Avatar Market',
     description: 'Roll for procedurally generated avatars, trade them with other players, and find your perfect look through our avatar marketplace.',
+    light: '/light-market.png',
+    dark: '/dark-market.png',
   },
   {
     icon: Users,
     title: 'Social Hub',
     description: 'Trade in-game items starting with Fallout 76 and more games coming soon. Plus DMs, group chats, polls, and a community feed.',
+    light: '/light-squad-feed.png',
+    dark: '/dark-squad-feed.png',
   },
 ]
 
@@ -254,7 +270,7 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
                   <button
                     type="button"
                     onClick={() => { setPlatform('apple'); setError('') }}
-                    className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
+                    className={`glass-card flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
                       platform === 'apple'
                         ? 'border-accent bg-accent/10'
                         : 'border-border hover:border-muted-foreground/30'
@@ -270,7 +286,7 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
                   <button
                     type="button"
                     onClick={() => { setPlatform('android'); setError('') }}
-                    className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
+                    className={`glass-card flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
                       platform === 'android'
                         ? 'border-accent bg-accent/10'
                         : 'border-border hover:border-muted-foreground/30'
@@ -342,20 +358,197 @@ function GetInTouchModal({ open, onClose }: { open: boolean; onClose: () => void
   )
 }
 
+function GamertagPrivacyModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { isDark } = useTheme()
+
+  if (!open) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative bg-card text-card-foreground rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-border">
+        {/* Header */}
+        <div className="sticky top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
+          <div className="flex items-center gap-3">
+            <EyeOff className="w-6 h-6 text-accent" />
+            <h2 className="text-lg font-bold text-foreground">How Gamertag Privacy Works</h2>
+          </div>
+          <button onClick={onClose} className="p-1 rounded-lg hover:bg-overlay transition-colors">
+            <X className="w-5 h-5 text-muted-foreground" />
+          </button>
+        </div>
+
+        <div className="p-6 space-y-5">
+          {/* Overview */}
+          <div className="rounded-xl p-4 bg-accent/10 border border-accent/20">
+            <div className="flex items-center gap-2 mb-2">
+              <EyeOff className="w-5 h-5 text-accent" />
+              <h3 className="font-semibold text-accent">One Toggle, Full Privacy</h3>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Enable gamertag privacy in your settings and your gamertags are <strong className="text-foreground">hidden everywhere across the app</strong> — your profile, trade listings, and all public views show <strong className="text-foreground">******</strong> instead.
+            </p>
+          </div>
+
+          {/* How it still works */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <Shield className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Privacy Without Friction</h3>
+            </div>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2"><span>&#8226;</span>Squad leaders receive your gamertag via notification when you join their squad</li>
+              <li className="flex gap-2"><span>&#8226;</span>Trade partners get your gamertag through PM or your assigned courier</li>
+              <li className="flex gap-2"><span>&#8226;</span>Your gamertag stays visible to people you follow</li>
+              <li className="flex gap-2"><span>&#8226;</span>Tap to copy gamertags directly from notifications and PMs — no manual typing needed</li>
+              <li className="flex gap-2"><span>&#8226;</span>Your gamertag is never exposed publicly — only shared with the people who need it</li>
+            </ul>
+          </div>
+
+          {/* Screenshots showing ****** in action */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">What Others See</h3>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">
+              When privacy is enabled, your gamertags appear as <strong className="text-foreground">******</strong> across all public screens.
+            </p>
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory">
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Settings</p>
+                <img
+                  src={isDark ? '/dark-privacy-settings.png' : '/light-privacy-settings.png'}
+                  alt="Settings with Show platform tags toggle"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Profile</p>
+                <img
+                  src={isDark ? '/dark-privacy-profile.png' : '/light-privacy-profile.png'}
+                  alt="Profile with hidden gamertags"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Game Trade</p>
+                <img
+                  src={isDark ? '/dark-privacy-trade.png' : '/light-privacy-trade.png'}
+                  alt="Trade listings with hidden gamertags"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Squad Up</p>
+                <img
+                  src={isDark ? '/dark-privacy-squad.png' : '/light-privacy-squad.png'}
+                  alt="Squad Up with hidden gamertags"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Tap to Copy</p>
+                <img
+                  src={isDark ? '/dark-privacy-copy.png' : '/light-privacy-copy.png'}
+                  alt="Tap to copy gamertag notification"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const SCREENSHOTS = [
   { light: '/light-squad-feed.png', dark: '/dark-squad-feed.png', alt: 'Rally Squad Up feed with open party slots' },
   { light: '/light-home.png', dark: '/dark-home.png', alt: 'Rally home with active squads and hot topics' },
-  { light: '/light-profile.png', dark: '/dark-profile.png', alt: 'Rally profile with gamertags, influence score, and level' },
+  { light: '/light-profile.png', dark: '/dark-profile.png', alt: 'Rally profile with gamertag privacy, influence score, and level' },
   { light: '/light-squad-create.png', dark: '/dark-squad-create.png', alt: 'Create a Squad Up call with game selection and gamertag' },
   { light: '/light-feed.png', dark: '/dark-feed.png', alt: 'Rally home feed with polls and hot topics' },
-  { light: '/light-trade.png', dark: '/dark-trade.png', alt: 'Rally Game Trade marketplace with item listings' },
+  { light: '/light-trade.png', dark: '/dark-trade.png', alt: 'Rally Game Trade marketplace with gamertag privacy' },
   { light: '/light-notifications.png', dark: '/dark-notifications.png', alt: 'Rally notifications with trade completions and courier requests' },
 ]
 
 export default function LandingPage() {
   const [tradingModalOpen, setTradingModalOpen] = useState(false)
+  const [privacyModalOpen, setPrivacyModalOpen] = useState(false)
   const [getInTouchOpen, setGetInTouchOpen] = useState(false)
+  const [featureScreenshot, setFeatureScreenshot] = useState<{ src: string; title: string } | null>(null)
+  const [lightboxVisible, setLightboxVisible] = useState(false)
+  const [lightboxClosing, setLightboxClosing] = useState(false)
   const { isDark } = useTheme()
+
+  // Magnifier state
+  const [magnifier, setMagnifier] = useState<{
+    active: boolean
+    imgSrc: string
+    imgRect: DOMRect
+    mouseX: number
+    mouseY: number
+  } | null>(null)
+  const magnifierRef = useRef(magnifier)
+  magnifierRef.current = magnifier
+
+  const MAGNIFIER_SIZE = 180
+  const ZOOM = 2.5
+
+  const handleMarqueeMouseDown = useCallback((e: React.MouseEvent<HTMLImageElement>) => {
+    e.preventDefault()
+    const img = e.currentTarget
+    const rect = img.getBoundingClientRect()
+    setMagnifier({
+      active: true,
+      imgSrc: img.src,
+      imgRect: rect,
+      mouseX: e.clientX,
+      mouseY: e.clientY,
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!magnifier?.active) return
+
+    const onMouseMove = (e: MouseEvent) => {
+      setMagnifier((prev) => prev ? { ...prev, mouseX: e.clientX, mouseY: e.clientY } : null)
+    }
+    const onMouseUp = () => {
+      setMagnifier(null)
+    }
+
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mouseup', onMouseUp)
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseup', onMouseUp)
+    }
+  }, [magnifier?.active])
+
+  const openLightbox = useCallback((src: string, title: string) => {
+    setFeatureScreenshot({ src, title })
+    requestAnimationFrame(() => setLightboxVisible(true))
+  }, [])
+
+  const closeLightbox = useCallback(() => {
+    setLightboxClosing(true)
+    setLightboxVisible(false)
+    setTimeout(() => {
+      setFeatureScreenshot(null)
+      setLightboxClosing(false)
+    }, 300)
+  }, [])
+
+  useEffect(() => {
+    if (!featureScreenshot) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [featureScreenshot, closeLightbox])
 
   return (
     <div>
@@ -365,7 +558,7 @@ export default function LandingPage() {
           Closed Alpha
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-4">
-          Trade. Predict. Compete.
+          Play. Trade. Compete.
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
           Rally is the social app built for gamers. Trade in-game items through our
@@ -409,52 +602,74 @@ export default function LandingPage() {
       </section>
 
       {/* App Screenshots — infinite marquee */}
-      <section className="bg-surface-alt py-16 overflow-hidden">
+      <section className="bg-surface-alt py-16 overflow-hidden relative">
         <h2 className="text-2xl font-bold text-center text-foreground mb-10">
           See Rally in action
         </h2>
         <div
-          className="flex w-max animate-marquee hover:[animation-play-state:paused]"
+          className={`flex w-max animate-marquee ${magnifier?.active ? '[animation-play-state:paused]' : 'hover:[animation-play-state:paused]'}`}
         >
           {[...SCREENSHOTS, ...SCREENSHOTS].map((screenshot, i) => (
             <img
               key={`${screenshot.alt}-${i}`}
               src={isDark ? screenshot.dark : screenshot.light}
               alt={screenshot.alt}
-              className="w-48 sm:w-56 rounded-2xl shadow-2xl border border-border shrink-0 mx-3"
+              draggable={false}
+              onMouseDown={handleMarqueeMouseDown}
+              data-cursor-magnify
+              className="w-48 sm:w-56 rounded-2xl shadow-2xl border border-border shrink-0 mx-3 select-none"
             />
           ))}
         </div>
+
+        {/* Magnifier lens */}
+        {magnifier?.active && (
+          <div
+            className="fixed z-50 rounded-full border-2 border-white/60 shadow-2xl pointer-events-none"
+            style={{
+              width: MAGNIFIER_SIZE,
+              height: MAGNIFIER_SIZE,
+              left: magnifier.mouseX - MAGNIFIER_SIZE / 2,
+              top: magnifier.mouseY - MAGNIFIER_SIZE / 2,
+              backgroundImage: `url(${magnifier.imgSrc})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: `${magnifier.imgRect.width * ZOOM}px ${magnifier.imgRect.height * ZOOM}px`,
+              backgroundPosition: `${-((magnifier.mouseX - magnifier.imgRect.left) * ZOOM - MAGNIFIER_SIZE / 2)}px ${-((magnifier.mouseY - magnifier.imgRect.top) * ZOOM - MAGNIFIER_SIZE / 2)}px`,
+            }}
+          />
+        )}
       </section>
 
       {/* Features */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4">
           <div className="text-center mb-12">
-            <Gamepad2 className="w-10 h-10 text-accent mx-auto mb-4" />
+            <img src={isDark ? '/logo-dark.png' : '/logo.png'} alt="Rally" className="w-10 h-10 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-foreground mb-3">
-              Built for Gamers, by Gamers
+              built for Gamers, by a Gamer
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              A secure trading marketplace, prediction polls, and a social feed — all in one app.
+              A social hub, trading market, LFG — all in one app.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {FEATURES.map((feature) => (
-              <div
+              <button
                 key={feature.title}
-                className="p-5 bg-card rounded-xl border border-border"
+                type="button"
+                onClick={() => openLightbox(isDark ? feature.dark : feature.light, feature.title)}
+                className="glass-card p-5 bg-card rounded-xl border border-border text-left"
               >
-                <feature.icon className="w-7 h-7 text-accent mb-3" />
+                <feature.icon className="feature-icon w-7 h-7 text-foreground mb-3" />
                 <h3 className="font-semibold text-foreground text-sm mb-1">{feature.title}</h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">{feature.description}</p>
-              </div>
+              </button>
             ))}
           </div>
 
           {/* Anti-Scam + CTA row */}
-          <div className="mt-8 rounded-2xl bg-surface-alt border border-border p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-6">
+          <div className="mt-8 rounded-2xl bg-card border border-border p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-6">
             <div className="flex-1">
               <h3 className="text-base font-bold mb-2 flex items-center gap-2 text-foreground">
                 <Shield className="w-5 h-5 text-red-500" />
@@ -486,10 +701,35 @@ export default function LandingPage() {
               </button>
             </div>
           </div>
+
+          {/* Gamertag Privacy */}
+          <div className="mt-4 rounded-2xl bg-card border border-border p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-6">
+            <div className="flex-1">
+              <h3 className="text-base font-bold mb-2 flex items-center gap-2 text-foreground">
+                <EyeOff className="w-5 h-5 text-accent" />
+                Gamertag Privacy
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Hide your gamertag from your public profile — it stays hidden everywhere across the app.
+                Trading and Squad Up still work seamlessly: squad leaders receive your gamertag via
+                notification when you join, and trade partners get it through PM or your assigned courier.
+                Full privacy, zero friction.
+              </p>
+            </div>
+            <div className="shrink-0 self-center">
+              <button
+                onClick={() => setPrivacyModalOpen(true)}
+                className="px-5 py-2.5 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                How it works
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
       <HowTradingWorksModal open={tradingModalOpen} onClose={() => setTradingModalOpen(false)} />
+      <GamertagPrivacyModal open={privacyModalOpen} onClose={() => setPrivacyModalOpen(false)} />
       <GetInTouchModal open={getInTouchOpen} onClose={() => setGetInTouchOpen(false)} />
 
       {/* CTA */}
@@ -516,6 +756,37 @@ export default function LandingPage() {
           </Link>
         </div>
       </section>
+
+      {/* Feature screenshot lightbox */}
+      {(featureScreenshot || lightboxClosing) && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-300 ${
+            lightboxVisible ? 'bg-black/80 backdrop-blur-sm' : 'bg-black/0 backdrop-blur-0'
+          }`}
+          onClick={closeLightbox}
+        >
+          <div
+            className={`relative max-w-sm w-full mx-4 transition-all duration-300 ${
+              lightboxVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={closeLightbox}
+              className="absolute -top-10 right-0 text-white/70 hover:text-white transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <p className="text-white text-sm font-medium text-center mb-3">{featureScreenshot?.title}</p>
+            <img
+              src={featureScreenshot?.src}
+              alt={featureScreenshot?.title}
+              className="w-full rounded-2xl shadow-2xl"
+            />
+          </div>
+        </div>
+      )}
     </div>
   )
 }

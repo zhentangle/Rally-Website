@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.zhentingle.rallyapp",
+      "sha256_cert_fingerprints": [
+        "A0:91:29:40:2F:4E:40:A8:72:81:00:AD:02:92:81:F0:F5:DF:02:79:5D:26:79:D6:62:2B:5F:D2:FD:0E:95:10"
+      ]
+    }
+  }
+]

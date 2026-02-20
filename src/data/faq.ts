@@ -205,7 +205,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'gold_benefits',
     question: "What are Rally Verified benefits?",
-    answer: "Rally Verified ($4.99/mo) includes: gold verified badge, gilded marble theme, 20 soulmate pulls/day (vs 3 free), doubled initial Podium speaking time, and +2 extra AI avatar generation pulls per day.",
+    answer: "Rally Verified ($4.99/mo) includes: gold verified badge, gilded marble theme, 20 soulmate pulls/day (vs 3 free), doubled initial Podium speaking time, and +2 extra avatar pulls per day.",
     category: 'billing',
   },
   {
@@ -377,9 +377,9 @@ export const FAQ_DATA: FAQEntry[] = [
     category: 'general',
   },
   {
-    id: 'ai_avatar',
-    question: "How do I generate an AI avatar?",
-    answer: "Tap your avatar on your profile to access avatar options. Upload a photo or generate one with AI! AI generation has a daily cooldown. Rally Verified members get +2 extra generation pulls per day.",
+    id: 'avatar_roll',
+    question: "How do I get an avatar?",
+    answer: "Tap your avatar on your profile to access avatar options. Upload a photo or roll for a procedurally generated DiceBear avatar! Rolling has a daily cooldown. Rally Verified members get +2 extra avatar pulls per day.",
     category: 'general',
   },
   {

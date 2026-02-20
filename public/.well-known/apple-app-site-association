@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["M8X2F7MV96.com.zhentingle.rallyapp"],
+        "components": [
+          { "/": "/poll/*" },
+          { "/": "/media/*" },
+          { "/": "/squad/*" },
+          { "/": "/profile/*" }
+        ]
+      }
+    ]
+  }
+}
