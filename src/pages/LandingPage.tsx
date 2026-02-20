@@ -86,10 +86,10 @@ function HowTradingWorksModal({ mounted, visible, onClose }: { mounted: boolean;
 
         <div className="p-6 space-y-5">
           {/* Zero Tolerance */}
-          <div className="rounded-xl p-4 bg-red-500/10 border border-red-500/20">
+          <div className="rounded-xl p-4 bg-overlay border border-border">
             <div className="flex items-center gap-2 mb-2">
-              <Ban className="w-5 h-5 text-red-500" />
-              <h3 className="font-semibold text-red-500">Zero Tolerance for Scamming</h3>
+              <Ban className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Zero Tolerance for Scamming</h3>
             </div>
             <p className="text-sm text-muted-foreground">
               Any attempt to scam another user results in an <strong className="text-foreground">instant and permanent ban</strong>. No warnings, no appeals. We use AI-powered checks alongside human review and maintain an integrated scammers list to keep the marketplace safe.
@@ -97,10 +97,10 @@ function HowTradingWorksModal({ mounted, visible, onClose }: { mounted: boolean;
           </div>
 
           {/* Ban Evasion */}
-          <div className="rounded-xl p-4 bg-red-500/10 border border-red-500/20">
+          <div className="rounded-xl p-4 bg-overlay border border-border">
             <div className="flex items-center gap-2 mb-2">
-              <Fingerprint className="w-5 h-5 text-red-500" />
-              <h3 className="font-semibold text-red-500">Ban Evasion Detection</h3>
+              <Fingerprint className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Ban Evasion Detection</h3>
             </div>
             <p className="text-sm text-muted-foreground">
               Device fingerprints are collected to detect and prevent ban circumvention. New accounts created after a ban will be identified and permanently banned.
@@ -139,7 +139,7 @@ function HowTradingWorksModal({ mounted, visible, onClose }: { mounted: boolean;
           {/* Influence Rewards */}
           <div className="rounded-xl p-4 bg-overlay border border-border">
             <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="w-5 h-5 text-amber-500" />
+              <TrendingUp className="w-5 h-5 text-foreground" />
               <h3 className="font-semibold text-foreground">Influence</h3>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -150,7 +150,7 @@ function HowTradingWorksModal({ mounted, visible, onClose }: { mounted: boolean;
           {/* Merit-based */}
           <div className="rounded-xl p-4 bg-overlay border border-border">
             <div className="flex items-center gap-2 mb-2">
-              <Trophy className="w-5 h-5 text-amber-500" />
+              <Trophy className="w-5 h-5 text-foreground" />
               <h3 className="font-semibold text-foreground">Merit-Based Trading</h3>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -159,10 +159,10 @@ function HowTradingWorksModal({ mounted, visible, onClose }: { mounted: boolean;
           </div>
 
           {/* Cash disclaimer */}
-          <div className="rounded-xl p-4 bg-amber-500/10 border border-amber-500/20">
+          <div className="rounded-xl p-4 bg-overlay border border-border">
             <div className="flex items-center gap-2 mb-2">
-              <AlertTriangle className="w-5 h-5 text-amber-500" />
-              <h3 className="font-semibold text-amber-500">Cash Transactions — No Platform Support</h3>
+              <AlertTriangle className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Cash Transactions — No Platform Support</h3>
             </div>
             <p className="text-sm text-muted-foreground">
               <strong className="text-foreground">Rally does NOT process, hold, or handle cash payments of any kind.</strong> All monetary transactions occur entirely outside the platform. Rally is not responsible for payment disputes, chargebacks, or non-payment.
@@ -252,7 +252,7 @@ function GetInTouchModal({ mounted, visible, onClose }: { mounted: boolean; visi
         <div className="p-6">
           {submitted ? (
             <div className="text-center py-4">
-              <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
+              <CheckCircle className="w-12 h-12 text-accent mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-foreground mb-2">You're on the list!</h3>
               <p className="text-sm text-muted-foreground mb-6">
                 We'll reach out to <strong className="text-foreground">{email}</strong> with early access details for the {platform === 'apple' ? 'Apple App Store' : 'Google Play Store'}.
@@ -337,7 +337,7 @@ function GetInTouchModal({ mounted, visible, onClose }: { mounted: boolean; visi
               </div>
 
               {error && (
-                <p className="text-sm text-red-500 flex items-center gap-1.5">
+                <p className="text-sm text-foreground flex items-center gap-1.5">
                   <AlertTriangle className="w-4 h-4 shrink-0" />
                   {error}
                 </p>
@@ -544,7 +544,7 @@ function SquadUpModal({ mounted, visible, onClose }: { mounted: boolean; visible
           {/* Real-Time */}
           <div className="rounded-xl p-4 bg-overlay border border-border">
             <div className="flex items-center gap-2 mb-3">
-              <Zap className="w-5 h-5 text-amber-500" />
+              <Zap className="w-5 h-5 text-foreground" />
               <h3 className="font-semibold text-foreground">Real-Time Sync</h3>
             </div>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -595,6 +595,14 @@ function SquadUpModal({ mounted, visible, onClose }: { mounted: boolean; visible
                 <img
                   src={isDark ? '/dark-home.png' : '/light-home.png'}
                   alt="Home tab with active squad banner"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Tap to Copy</p>
+                <img
+                  src={isDark ? '/dark-squad-copy.png' : '/light-squad-copy.png'}
+                  alt="Tap to copy gamertag from profile"
                   className="w-full rounded-xl border border-border snap-start"
                 />
               </div>
@@ -826,7 +834,7 @@ export default function LandingPage() {
           <div className="mt-8 rounded-2xl bg-card border border-border p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-6">
             <div className="flex-1">
               <h3 className="text-base font-bold mb-2 flex items-center gap-2 text-foreground">
-                <Shield className="w-5 h-5 text-red-500" />
+                <Shield className="w-5 h-5 text-foreground" />
                 Advanced Anti-Scam Protection
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
@@ -863,12 +871,23 @@ export default function LandingPage() {
                 <EyeOff className="w-5 h-5 text-accent" />
                 Gamertag Privacy
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                 Hide your gamertag from your public profile — it stays hidden everywhere across the app.
                 Trading and Squad Up still work seamlessly: squad leaders receive your gamertag via
                 notification when you join, and trade partners get it through PM or your assigned courier.
                 Full privacy, zero friction.
               </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
+                  <EyeOff className="w-3 h-3" /> One-Toggle Privacy
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
+                  <Copy className="w-3 h-3" /> Seamless Sharing
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
+                  <EyeOff className="w-3 h-3" /> Hidden Everywhere
+                </span>
+              </div>
             </div>
             <div className="shrink-0 self-center">
               <button
@@ -896,7 +915,7 @@ export default function LandingPage() {
                   <Zap className="w-3 h-3" /> Real-Time Sync
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
-                  <Copy className="w-3 h-3" /> Auto Gamertag Sharing
+                  <Copy className="w-3 h-3" /> Seamless Sharing
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
                   <Gamepad2 className="w-3 h-3" /> Multi-Platform
