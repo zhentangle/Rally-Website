@@ -7,7 +7,7 @@
   --surface-alt: #f3f4f6;
   --muted: #f3f4f6;
   --muted-foreground: rgba(0,0,0,0.7);
-  --accent: #ef4444;
+  --accent: #000000;
   --accent-foreground: #ffffff;
   --border: rgba(0,0,0,0.1);
   --card: #ffffff;
@@ -25,8 +25,8 @@
     --surface-alt: #1c1c24;
     --muted: #141419;
     --muted-foreground: rgba(255,255,255,0.85);
-    --accent: #ef4444;
-    --accent-foreground: #ffffff;
+    --accent: #ffffff;
+    --accent-foreground: #000000;
     --border: rgba(255,255,255,0.12);
     --card: #18181f;
     --card-foreground: #ffffff;
@@ -144,7 +144,7 @@
   padding: 1px;
   background: conic-gradient(
     from var(--border-angle),
-    #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd, #ff6b6b
+    #c0c0c0, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd, #c0c0c0
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -173,13 +173,13 @@
 }
 
 @keyframes icon-gradient {
-  0% { color: #ff6b6b; }
+  0% { color: #c0c0c0; }
   16% { color: #feca57; }
   33% { color: #48dbfb; }
   50% { color: #ff9ff3; }
   66% { color: #54a0ff; }
   83% { color: #5f27cd; }
-  100% { color: #ff6b6b; }
+  100% { color: #c0c0c0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

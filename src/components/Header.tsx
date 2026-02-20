@@ -147,7 +147,7 @@ export default function Header() {
               <ChevronDown size={14} className={cn('transition-transform', mobileLegalOpen && 'rotate-180')} />
             </button>
             <div className={cn(
-              'flex flex-col gap-1 pl-4 overflow-hidden transition-all duration-150',
+              'flex flex-col gap-1 overflow-hidden transition-all duration-150',
               mobileLegalOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
             )}>
               {LEGAL_LINKS.map((link) => (

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords, EyeOff, UserPlus, Radio, Zap, Copy } from 'lucide-react'
+import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords, Eye, EyeOff, UserPlus, Radio, Zap, Copy } from 'lucide-react'
 import { useTheme } from '@/context/ThemeContext'
 import { useAnimatedPresence } from '@/hooks/useAnimatedPresence'
 
@@ -882,7 +882,7 @@ export default function LandingPage() {
                   <EyeOff className="w-3 h-3" /> One-Toggle Privacy
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
-                  <Copy className="w-3 h-3" /> Seamless Sharing
+                  <Eye className="w-3 h-3" /> Visible to Those You Follow
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
                   <EyeOff className="w-3 h-3" /> Hidden Everywhere
