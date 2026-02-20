@@ -57,13 +57,13 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'find_predictions',
     question: "Where do I find predictions to vote on?",
-    answer: "Look for polls with the Seer badge on the home feed! Seer posts new predictions daily on trending topics — stocks, sports, tech, and more.",
+    answer: "Look for polls with the Seer badge on the home feed! Seer posts new predictions daily on gaming, esports, tech, and trending topics.",
     category: 'predictions',
   },
   {
     id: 'prediction_categories',
     question: "What topics do you make predictions about?",
-    answer: "Rally covers: Stocks & Crypto, Sports, Tech, Entertainment, and World Events. New predictions on the most interesting upcoming events are posted daily!",
+    answer: "Rally covers: Gaming & Esports, Stocks & Crypto, Sports, Tech, Entertainment, and World Events. New predictions on the most interesting upcoming events are posted daily!",
     category: 'predictions',
   },
 
@@ -129,7 +129,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'how_achievements_work',
     question: "How do achievements work?",
-    answer: "Hit prediction milestones to unlock flairs! First Vision (1), Rising Seer (5), Seasoned Sage (10), Master Prophet (25). Plus Hot Streak flairs at 3, 5, and 10!",
+    answer: "Hit prediction milestones to unlock flairs! First Vision (1), Rising Seer (5), Seasoned Sage (10), Master Prophet (25). Hot Streak flairs at 3, 5, and 10. Plus gaming flairs for your favorite games — LoL, Valorant, Fortnite, Minecraft, CS2, and more!",
     category: 'achievements',
   },
   {
@@ -277,7 +277,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'what_is_rally',
     question: "What is Rally?",
-    answer: "Rally is the social app for gamers. Trade in-game items through our secure marketplace, predict real-world outcomes, earn XP, and compete with friends on the leaderboard!",
+    answer: "Rally is a social app for gamers! Squad up with teammates using LFG, link your gamertags (PSN, Xbox, Steam, Riot ID, Epic), trade in-game items, compete in mini-games, find your gaming soulmate, and vote on polls. Earn XP, collect gaming flairs, and climb leaderboards!",
     category: 'general',
   },
   {
@@ -295,7 +295,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'what_is_fairground',
     question: "What is the Fairground?",
-    answer: "The Fairground is Rally's social hub! Tap the tarot card icon on the home tab to access: Soulmate matching, Personality Test, Trivia battles, Debate Leagues, Community Rooms, Hockey, and the Seer Rally Cup leaderboard.",
+    answer: "The Fairground is Rally's gaming hub! Tap the tarot card icon on the home tab to access: Soulmate matching, Personality Test, Trivia battles, Debate Leagues, Hockey, Trade Game, Pong, Block Buster, and the Seer Rally Cup leaderboard.",
     category: 'general',
   },
   {
@@ -325,7 +325,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'debate_leagues',
     question: "How do Debate Leagues work?",
-    answer: "Debate Leagues are in the Fairground! Join or create leagues, then debate in 5 modes: 1v1, 2v2, King of the Hill, Round Robin, or Model UN. An AI Judge scores on clarity, evidence, rebuttal, and rhetoric.",
+    answer: "Debate Leagues are in the Fairground! Join or create leagues, then debate in 5 modes: 1v1, 2v2, King of the Hill, Round Robin, or Model UN. An AI Judge scores on clarity, evidence, rebuttal, and rhetoric. Standard = 70% AI + 30% audience. MUN = 30% AI + 70% audience.",
     category: 'general',
   },
   {
@@ -337,7 +337,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'podium_crowns',
     question: "How does the Podium work?",
-    answer: "The Podium is live audio King of the Hill! The King speaks while challengers queue up. Audience reactions extend the King's reign. You earn 1 crown per 60 seconds of audience reactions. Crowns show on your profile.",
+    answer: "The Podium is live audio King of the Hill! The King speaks while challengers queue up. Audience reactions extend the King's reign. You earn 1 crown per 60 seconds of audience reactions. Crowns show on your profile. Verified members get doubled initial speaking time!",
     category: 'general',
   },
   {
@@ -349,7 +349,7 @@ export const FAQ_DATA: FAQEntry[] = [
   {
     id: 'sponsored_polls',
     question: "How do sponsored polls work?",
-    answer: "Boost your poll's visibility! Free users get one 24-hour free boost per week. Business accounts get 72 hours/week free. Paid tiers range from $1.99 to $29.99 for 1 day to 1 month of boosted visibility.",
+    answer: "Boost your poll's visibility! Rally Verified users get one free 2-hour boost per day. Creator accounts get one free 24-hour boost per day plus location demographic targeting. Paid tiers range from $1.99 to $29.99 for extended durations.",
     category: 'general',
   },
   {
@@ -365,9 +365,9 @@ export const FAQ_DATA: FAQEntry[] = [
     category: 'general',
   },
   {
-    id: 'business_account',
-    question: "What is a Business Account?",
-    answer: "Business accounts unlock an analytics dashboard with demographics (age, gender), poll performance metrics, audience targeting, and 72 hours/week of free poll sponsorship. Apply in Settings — admin approval is required.",
+    id: 'creator_account',
+    question: "What is a Creator Account?",
+    answer: "Creator accounts ($50/mo) unlock an analytics dashboard with demographics, audience insights, location demographic targeting for sponsored content, and one free 24-hour boost per day. Subscribe in Settings — admin review required after payment.",
     category: 'general',
   },
   {
@@ -377,9 +377,9 @@ export const FAQ_DATA: FAQEntry[] = [
     category: 'general',
   },
   {
-    id: 'avatar_roll',
-    question: "How do I get an avatar?",
-    answer: "Tap your avatar on your profile to access avatar options. Upload a photo or roll for a procedurally generated DiceBear avatar! Rolling has a daily cooldown. Rally Verified members get +2 extra avatar pulls per day.",
+    id: 'ai_avatar',
+    question: "How do I generate an AI avatar?",
+    answer: "Tap your avatar on your profile to access avatar options. Upload a photo or generate one with AI! AI generation has a daily cooldown. Rally Verified members get +2 extra AI avatar generation pulls per day.",
     category: 'general',
   },
   {
@@ -392,6 +392,30 @@ export const FAQ_DATA: FAQEntry[] = [
     id: 'voting_deadline',
     question: "How do voting deadlines work?",
     answer: "When creating a poll, set a deadline from 1 hour to 1 week. The poll automatically closes when the deadline hits and no more votes can be cast. Results become final at that point.",
+    category: 'general',
+  },
+  {
+    id: 'squad_lfg',
+    question: "How does the Squad system work?",
+    answer: "Squad is Rally's LFG (Looking For Group) system! Tap the + button → Squad tab. Pick your game (LoL, Valorant, Fortnite, Minecraft, CS2, etc.), game mode, and platform (PSN/Xbox/Steam/Riot/Epic). Your gamertag auto-fills from your profile. Set an expiry timer, invite friends, and your squad post goes live!",
+    category: 'general',
+  },
+  {
+    id: 'gaming_profile',
+    question: "How do I link my gamertags?",
+    answer: "Go to your Profile → Settings → Platform Tags. Link your gamertags for PSN, Xbox, Steam, Riot ID, and Epic Games. Your tags show on your profile and auto-fill when creating squads. Riot ID users can also view their LoL ranked stats, champion mastery, and match history right on their profile!",
+    category: 'account',
+  },
+  {
+    id: 'game_trading',
+    question: "How does game trading work?",
+    answer: "Game Trade is Rally's in-game item marketplace! List items for trade or sale, browse other players' listings, and send trade proposals. The system includes community couriers for safe exchanges and dispute resolution if anything goes wrong.",
+    category: 'general',
+  },
+  {
+    id: 'hockey_game',
+    question: "How does Hockey work?",
+    answer: "Hockey is an air hockey mini-game in the Fairground! Play Survival mode (solo vs increasingly harder AI), CPU mode (3/5/7 goals), Local 2P on the same device, or WiFi multiplayer against other Rally users. Your survival high scores appear on the global leaderboard!",
     category: 'general',
   },
 ]

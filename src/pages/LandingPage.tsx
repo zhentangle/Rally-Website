@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords, EyeOff } from 'lucide-react'
+import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords, EyeOff, UserPlus, Radio, Zap, Copy } from 'lucide-react'
 import { useTheme } from '@/context/ThemeContext'
 import { useAnimatedPresence } from '@/hooks/useAnimatedPresence'
 
@@ -467,6 +467,153 @@ function GamertagPrivacyModal({ mounted, visible, onClose }: { mounted: boolean;
   )
 }
 
+function SquadUpModal({ mounted, visible, onClose }: { mounted: boolean; visible: boolean; onClose: () => void }) {
+  const { isDark } = useTheme()
+
+  if (!mounted) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className={`absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`} onClick={onClose} />
+      <div className={`relative bg-card text-card-foreground rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-border transition-all duration-200 ${visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}>
+        {/* Header */}
+        <div className="sticky top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
+          <div className="flex items-center gap-3">
+            <Swords className="w-6 h-6 text-accent" />
+            <h2 className="text-lg font-bold text-foreground">How Squad Up Works</h2>
+          </div>
+          <button onClick={onClose} className="p-1 rounded-lg hover:bg-overlay transition-colors">
+            <X className="w-5 h-5 text-muted-foreground" />
+          </button>
+        </div>
+
+        <div className="p-6 space-y-5">
+          {/* Overview */}
+          <div className="rounded-xl p-4 bg-accent/10 border border-accent/20">
+            <div className="flex items-center gap-2 mb-2">
+              <Swords className="w-5 h-5 text-accent" />
+              <h3 className="font-semibold text-accent">Real-Time LFG</h3>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Post your game, invite friends or find randoms, and fill your squad in real time. Gamertags auto-shared, slots update live — no more "drop your GT in chat" hassle.
+            </p>
+          </div>
+
+          {/* Creation Flow */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <Gamepad2 className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Creation Flow</h3>
+            </div>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2"><span>&#8226;</span>Pick a game from the catalog, then choose mode (ranked, casual, etc.) and platform (PS / Xbox / PC)</li>
+              <li className="flex gap-2"><span>&#8226;</span>Your gamertag auto-fills from saved tags — no retyping every time</li>
+              <li className="flex gap-2"><span>&#8226;</span>Add an optional note like "Looking for chill teammates…"</li>
+              <li className="flex gap-2"><span>&#8226;</span>Set an expiry window — 15 minutes up to 4 hours</li>
+              <li className="flex gap-2"><span>&#8226;</span>Invite followers via a multi-select modal before posting</li>
+              <li className="flex gap-2"><span>&#8226;</span>Live preview shows your slot, invited users, and open dashed slots</li>
+            </ul>
+          </div>
+
+          {/* Broadcasting & Discovery */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <Radio className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Broadcasting & Discovery</h3>
+            </div>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2"><span>&#8226;</span>Home tab banner — persistent top banner showing your active squads with real-time member count</li>
+              <li className="flex gap-2"><span>&#8226;</span>Search tab — dedicated "Squads" tab with full-text search, active squads ranked first</li>
+              <li className="flex gap-2"><span>&#8226;</span>Feed — squad posts appear as cards in the main feed alongside polls and trades</li>
+            </ul>
+          </div>
+
+          {/* Joining */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <UserPlus className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Joining a Squad</h3>
+            </div>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2"><span>&#8226;</span>Direct join — tap the squad card and join with your gamertag</li>
+              <li className="flex gap-2"><span>&#8226;</span>Invite join — receive an in-app notification + push notification with Accept / Decline buttons</li>
+              <li className="flex gap-2"><span>&#8226;</span>Accept auto-fills your gamertag (smart-matched by platform and game), or manual entry as fallback</li>
+            </ul>
+          </div>
+
+          {/* Real-Time */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <Zap className="w-5 h-5 text-amber-500" />
+              <h3 className="font-semibold text-foreground">Real-Time Sync</h3>
+            </div>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2"><span>&#8226;</span>Live member sync — members joining or leaving update instantly across all devices</li>
+              <li className="flex gap-2"><span>&#8226;</span>Notifications for every join/leave sent to the creator and all members</li>
+              <li className="flex gap-2"><span>&#8226;</span>Squad auto-closes when full and reopens if someone leaves</li>
+            </ul>
+          </div>
+
+          {/* Gamertag Display */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <Copy className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">Gamertag Display</h3>
+            </div>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex gap-2"><span>&#8226;</span>Members' gamertags shown in the expanded overlay — tap to copy to clipboard</li>
+              <li className="flex gap-2"><span>&#8226;</span>Respects gamertag privacy settings (masked if user opted out)</li>
+              <li className="flex gap-2"><span>&#8226;</span>League of Legends squads fetch and display Riot ranked stats (tier, LP, win rate)</li>
+            </ul>
+          </div>
+
+          {/* Screenshots */}
+          <div className="rounded-xl p-4 bg-overlay border border-border">
+            <div className="flex items-center gap-2 mb-3">
+              <Users className="w-5 h-5 text-foreground" />
+              <h3 className="font-semibold text-foreground">See It in Action</h3>
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory">
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Create</p>
+                <img
+                  src={isDark ? '/dark-squad-create.png' : '/light-squad-create.png'}
+                  alt="Create a Squad Up call"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Feed</p>
+                <img
+                  src={isDark ? '/dark-squad-feed.png' : '/light-squad-feed.png'}
+                  alt="Squad Up feed with open slots"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Home Banner</p>
+                <img
+                  src={isDark ? '/dark-home.png' : '/light-home.png'}
+                  alt="Home tab with active squad banner"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+              <div className="shrink-0 w-48">
+                <p className="text-xs text-muted-foreground text-center mb-2">Privacy</p>
+                <img
+                  src={isDark ? '/dark-privacy-squad.png' : '/light-privacy-squad.png'}
+                  alt="Squad Up with gamertag privacy"
+                  className="w-full rounded-xl border border-border snap-start"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const ALL_SCREENSHOTS = [
   { light: '/light-squad-feed.png', dark: '/dark-squad-feed.png', alt: 'Rally Squad Up feed with open party slots' },
   { light: '/light-home.png', dark: '/dark-home.png', alt: 'Rally home with active squads and hot topics' },
@@ -485,6 +632,7 @@ const SCREENSHOTS = SHOW_RIOT ? ALL_SCREENSHOTS : ALL_SCREENSHOTS.filter(s => !s
 export default function LandingPage() {
   const tradingModal = useAnimatedPresence(200)
   const privacyModal = useAnimatedPresence(200)
+  const squadUpModal = useAnimatedPresence(200)
   const getInTouchModal = useAnimatedPresence(200)
   const lightbox = useAnimatedPresence(300)
   const [lightboxData, setLightboxData] = useState<{ src: string; title: string } | null>(null)
@@ -731,11 +879,45 @@ export default function LandingPage() {
               </button>
             </div>
           </div>
+
+          {/* Squad Up */}
+          <div className="mt-4 rounded-2xl bg-card border border-border p-6 sm:p-8 flex flex-col sm:flex-row items-start gap-6">
+            <div className="flex-1">
+              <h3 className="text-base font-bold mb-2 flex items-center gap-2 text-foreground">
+                <Swords className="w-5 h-5 text-accent" />
+                Squad Up
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Post your game, invite friends or find randoms, and fill your squad in real time.
+                Gamertags auto-shared, slots update live — no more scrambling for party invites.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
+                  <Zap className="w-3 h-3" /> Real-Time Sync
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
+                  <Copy className="w-3 h-3" /> Auto Gamertag Sharing
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
+                  <Gamepad2 className="w-3 h-3" /> Multi-Platform
+                </span>
+              </div>
+            </div>
+            <div className="shrink-0 self-center">
+              <button
+                onClick={squadUpModal.open}
+                className="px-5 py-2.5 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                How it works
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
       <HowTradingWorksModal mounted={tradingModal.mounted} visible={tradingModal.visible} onClose={tradingModal.close} />
       <GamertagPrivacyModal mounted={privacyModal.mounted} visible={privacyModal.visible} onClose={privacyModal.close} />
+      <SquadUpModal mounted={squadUpModal.mounted} visible={squadUpModal.visible} onClose={squadUpModal.close} />
       <GetInTouchModal mounted={getInTouchModal.mounted} visible={getInTouchModal.visible} onClose={getInTouchModal.close} />
 
       {/* CTA */}
