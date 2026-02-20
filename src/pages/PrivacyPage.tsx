@@ -11,8 +11,9 @@ const TOC = [
   { id: 'data-security', label: '7. Data Security' },
   { id: 'international-transfers', label: '8. International Data Transfers' },
   { id: 'age-restriction', label: '9. Age Restriction' },
-  { id: 'changes', label: '10. Changes to This Policy' },
-  { id: 'contact', label: '11. Contact Us' },
+  { id: 'third-party-trademarks', label: '10. Third-Party Trademarks' },
+  { id: 'changes', label: '11. Changes to This Policy' },
+  { id: 'contact', label: '12. Contact Us' },
 ]
 
 export default function PrivacyPage() {
@@ -85,7 +86,7 @@ export default function PrivacyPage() {
             <li>Government-issued ID document images</li>
             <li>Selfie for document matching (if enabled)</li>
           </ul>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 my-2">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 my-2">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Important: We do NOT store your ID images or biometric data.
               Stripe processes verification and returns only a pass/fail status
@@ -162,7 +163,7 @@ export default function PrivacyPage() {
             <li>Poll authors can see that you voted, but not what you chose</li>
             <li>We cannot reveal your individual voting patterns</li>
           </ul>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 my-2">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 my-2">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Additionally, poll authors can enable Secret Ballot for specific
               polls, making all votes on that poll anonymous regardless of
@@ -240,7 +241,7 @@ export default function PrivacyPage() {
       {/* 4. Information Sharing */}
       <section id="information-sharing" className="mb-10 scroll-mt-24">
         <h2 className="text-xl font-bold text-primary mb-3">4. Information Sharing</h2>
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 my-2">
+        <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 my-2">
           <p className="text-sm leading-relaxed text-muted-foreground">
             We do NOT sell your personal information.
           </p>
@@ -404,7 +405,7 @@ export default function PrivacyPage() {
       {/* 9. Age Restriction */}
       <section id="age-restriction" className="mb-10 scroll-mt-24">
         <h2 className="text-xl font-bold text-primary mb-3">9. Age Restriction</h2>
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 my-2">
+        <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 my-2">
           <p className="text-sm leading-relaxed text-muted-foreground">
             Rally is intended for users aged 18 and older only. We do not
             knowingly collect information from anyone under 18. If we discover
@@ -414,9 +415,32 @@ export default function PrivacyPage() {
         </div>
       </section>
 
-      {/* 10. Changes to This Policy */}
+      {/* 10. Third-Party Trademarks */}
+      <section id="third-party-trademarks" className="mb-10 scroll-mt-24">
+        <h2 className="text-xl font-bold text-primary mb-3">10. Third-Party Trademarks</h2>
+        <p className="text-sm leading-relaxed text-muted-foreground mb-2">
+          Game names, logos, and identifiers displayed within the Service
+          are the property of their respective owners and are used solely
+          for identification purposes under nominative fair use. Rally does
+          not claim ownership of any third-party intellectual property.
+        </p>
+        <p className="text-sm leading-relaxed text-muted-foreground mb-2">
+          Rally is an independent platform designed to help players find
+          teammates and engage with gaming communities. The display of
+          game-related content does not imply any affiliation with or
+          endorsement by any game publisher or developer.
+        </p>
+        <p className="text-sm leading-relaxed text-muted-foreground mb-2">
+          If you are a rights holder with concerns, contact us at{' '}
+          <a href="mailto:support@rally.ink" className="text-accent hover:underline">
+            support@rally.ink
+          </a>.
+        </p>
+      </section>
+
+      {/* 11. Changes to This Policy */}
       <section id="changes" className="mb-10 scroll-mt-24">
-        <h2 className="text-xl font-bold text-primary mb-3">10. Changes to This Policy</h2>
+        <h2 className="text-xl font-bold text-primary mb-3">11. Changes to This Policy</h2>
         <p className="text-sm leading-relaxed text-muted-foreground mb-2">
           We may update this Privacy Policy periodically. Material changes will
           be notified through the app and may require renewed consent.
@@ -426,9 +450,9 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      {/* 11. Contact Us */}
+      {/* 12. Contact Us */}
       <section id="contact" className="mb-10 scroll-mt-24">
-        <h2 className="text-xl font-bold text-primary mb-3">11. Contact Us</h2>
+        <h2 className="text-xl font-bold text-primary mb-3">12. Contact Us</h2>
         <p className="text-sm leading-relaxed text-muted-foreground mb-2">For privacy inquiries or to exercise your rights:</p>
         <p className="text-sm leading-relaxed text-muted-foreground mb-2">
           Email:{' '}

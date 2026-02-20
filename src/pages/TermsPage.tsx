@@ -17,11 +17,12 @@ const TOC = [
   { id: 'indemnification', label: '13. Indemnification' },
   { id: 'termination', label: '14. Termination' },
   { id: 'third-party', label: '15. Third-Party Services' },
-  { id: 'dmca', label: '16. DMCA and Copyright' },
-  { id: 'force-majeure', label: '17. Force Majeure' },
-  { id: 'dispute-resolution', label: '18. Dispute Resolution' },
-  { id: 'general', label: '19. General Provisions' },
-  { id: 'contact', label: '20. Contact' },
+  { id: 'third-party-game-content', label: '16. Third-Party Game Content' },
+  { id: 'dmca', label: '17. DMCA and Copyright' },
+  { id: 'force-majeure', label: '18. Force Majeure' },
+  { id: 'dispute-resolution', label: '19. Dispute Resolution' },
+  { id: 'general', label: '20. General Provisions' },
+  { id: 'contact', label: '21. Contact' },
 ]
 
 export default function TermsPage() {
@@ -73,7 +74,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">2.1 Age Requirements</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               You must be at least 18 years old to use Rally. By creating an
               account, you represent and warrant that you are at least 18 years
@@ -110,7 +111,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">3.2 Service Modifications</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               We reserve the right to modify, suspend, or discontinue any part
               of the Service (including any feature, content, pricing, or
@@ -212,7 +213,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">5.1 Opt-In Only</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Political content on Rally is strictly opt-in. You will NOT see
               political polls unless you explicitly add "Politics" to your
@@ -242,7 +243,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">5.3 Not Election Interference</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Rally polls are for entertainment and engagement purposes only.
               Rally is NOT affiliated with any government, political party,
@@ -299,7 +300,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">6.3 Cancellation and Refunds</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Subscriptions: Cancel anytime through your device's Settings
               (iOS: Settings &rarr; Apple ID &rarr; Subscriptions;
@@ -333,7 +334,7 @@ export default function TermsPage() {
             activities such as voting, posting, commenting, and other
             participation on the platform.
           </p>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Rally Score has no monetary value, cannot be redeemed for cash,
               and cannot be transferred outside the platform. Rally Score is
@@ -385,7 +386,7 @@ export default function TermsPage() {
             the medium of exchange. By participating in avatar trading, you
             agree:
           </p>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               All trades are final and irreversible once confirmed. Rally is
               not responsible for trades you regret, nor for the perceived
@@ -402,7 +403,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">7.5 Economy Controls</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Rally reserves the right, at its sole discretion and without
               prior notice, to:
@@ -441,7 +442,7 @@ export default function TermsPage() {
             apparel, plans) with other users. By using Game Trade, you
             acknowledge and agree:
           </p>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Rally is a platform facilitating user-to-user trades. Rally does
               NOT own, sell, verify, or guarantee any items listed. Rally is
@@ -452,7 +453,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">8.2 Cash Transactions</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Rally does NOT process, handle, facilitate, or support cash
               transactions of any kind. When users choose to exchange real
@@ -475,7 +476,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">8.3 Community Couriers</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Couriers are volunteer community members, NOT Rally employees,
               contractors, or official representatives. Rally does NOT:
@@ -507,7 +508,7 @@ export default function TermsPage() {
             Arbitrators (called "Adjudicators") are experienced community
             members, NOT Rally employees or professional arbitrators.
           </p>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Arbitration decisions are advisory only and not legally binding.
               Rally does NOT enforce arbitration outcomes, reverse trades, or
@@ -537,7 +538,7 @@ export default function TermsPage() {
             <li>Impersonate couriers or adjudicators</li>
             <li>Harass, threaten, or extort other traders</li>
           </ul>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-3 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mt-3 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Violations may result in immediate account termination, loss of
               all Rally Score and virtual items, and permanent ban from the
@@ -549,7 +550,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">8.6 No Warranty or Guarantee</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               RALLY MAKES NO WARRANTIES, EXPRESS OR IMPLIED, REGARDING GAME
               TRADE. RALLY DOES NOT GUARANTEE:
@@ -578,7 +579,7 @@ export default function TermsPage() {
             solely responsible for understanding and complying with the game
             publisher's rules.
           </p>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Rally is not responsible if your game account is banned,
               suspended, or penalized for trading activity that violates the
@@ -691,7 +692,7 @@ export default function TermsPage() {
             rights. A username is a functional identifier within the Service,
             not property.
           </p>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               We reserve the right to reclaim, reassign, suspend, or rename
               any username at any time, for any reason or no reason, at our
@@ -727,7 +728,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">11.1 Service Availability</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND,
               EXPRESS OR IMPLIED. WE DO NOT GUARANTEE ACCURACY, COMPLETENESS,
@@ -738,7 +739,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">11.2 Platform, Not Publisher</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               Rally is a neutral technology platform that enables users to
               create and participate in polls. Rally does NOT:
@@ -770,7 +771,7 @@ export default function TermsPage() {
             <li>Not financial, legal, betting, or professional advice</li>
             <li>Subject to the same content standards as user polls</li>
           </ul>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-3 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mt-3 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               AI predictions are not guarantees of future outcomes. Do not make
               financial, betting, or other consequential decisions based on AI
@@ -858,7 +859,7 @@ export default function TermsPage() {
 
         <div className="ml-2 mt-4">
           <h3 className="text-base font-semibold text-muted-foreground mb-3">14.2 By Us</h3>
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-3">
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4 mb-3">
             <p className="text-sm leading-relaxed text-muted-foreground">
               We may suspend, restrict, or permanently terminate your account and
               access to the Service at any time, for any reason or no reason, at
@@ -887,7 +888,7 @@ export default function TermsPage() {
             The following provisions survive termination: Sections 7 (Virtual
             Items & Rally Score), 8 (Game Trade), 10 (Intellectual Property),
             11 (Disclaimers), 12 (Limitation of Liability), 13 (Indemnification),
-            18 (Dispute Resolution), and any other provisions that by their
+            19 (Dispute Resolution), and any other provisions that by their
             nature should survive.
           </p>
         </div>
@@ -924,12 +925,38 @@ export default function TermsPage() {
         </p>
       </section>
 
-      {/* 16. DMCA and Copyright */}
+      {/* 16. Third-Party Game Content */}
+      <section id="third-party-game-content" className="mb-10 scroll-mt-24">
+        <h2 className="text-xl font-bold text-primary mb-4">16. Third-Party Game Content</h2>
+        <p className="text-sm leading-relaxed text-muted-foreground mb-3">
+          Rally is an independent platform designed to help players find
+          teammates, create squads, and engage with gaming communities.
+          Rally is not affiliated with, endorsed by, or sponsored by any
+          game publisher or developer.
+        </p>
+        <p className="text-sm leading-relaxed text-muted-foreground mb-3">
+          All game names, logos, trademarks, and registered trademarks
+          displayed within the Service are the property of their respective
+          owners and are used solely for identification purposes under
+          nominative fair use. Their presence within the app does not imply
+          any partnership, sponsorship, or endorsement.
+        </p>
+        <p className="text-sm leading-relaxed text-muted-foreground mb-3">
+          If you are a rights holder and have concerns about the use of
+          your intellectual property within Rally, please contact us at{' '}
+          <a href="mailto:support@rally.ink" className="text-accent hover:underline">
+            support@rally.ink
+          </a>{' '}
+          and we will promptly address your request.
+        </p>
+      </section>
+
+      {/* 17. DMCA and Copyright */}
       <section id="dmca" className="mb-10 scroll-mt-24">
-        <h2 className="text-xl font-bold text-primary mb-4">16. DMCA and Copyright</h2>
+        <h2 className="text-xl font-bold text-primary mb-4">17. DMCA and Copyright</h2>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">16.1 Safe Harbor</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">17.1 Safe Harbor</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             Rally acts as an online service provider under the Digital Millennium
             Copyright Act (DMCA). We are not liable for user-generated content
@@ -939,7 +966,7 @@ export default function TermsPage() {
         </div>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">16.2 Takedown Notices</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">17.2 Takedown Notices</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             If you believe content on Rally infringes your copyright, submit a
             DMCA takedown notice to support@rally.ink with:
@@ -955,7 +982,7 @@ export default function TermsPage() {
         </div>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">16.3 Repeat Infringers</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">17.3 Repeat Infringers</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             We will terminate accounts of users who are repeat copyright
             infringers in appropriate circumstances.
@@ -963,9 +990,9 @@ export default function TermsPage() {
         </div>
       </section>
 
-      {/* 17. Force Majeure */}
+      {/* 18. Force Majeure */}
       <section id="force-majeure" className="mb-10 scroll-mt-24">
-        <h2 className="text-xl font-bold text-primary mb-4">17. Force Majeure</h2>
+        <h2 className="text-xl font-bold text-primary mb-4">18. Force Majeure</h2>
         <p className="text-sm leading-relaxed text-muted-foreground mb-3">
           We shall not be liable for any failure or delay in performing our
           obligations under these Terms due to causes beyond our reasonable
@@ -982,12 +1009,12 @@ export default function TermsPage() {
         </p>
       </section>
 
-      {/* 18. Dispute Resolution */}
+      {/* 19. Dispute Resolution */}
       <section id="dispute-resolution" className="mb-10 scroll-mt-24">
-        <h2 className="text-xl font-bold text-primary mb-4">18. Dispute Resolution</h2>
+        <h2 className="text-xl font-bold text-primary mb-4">19. Dispute Resolution</h2>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">18.1 Governing Law</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">19.1 Governing Law</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             These Terms are governed by the laws of the State of Delaware, USA,
             without regard to conflict of law principles.
@@ -995,7 +1022,7 @@ export default function TermsPage() {
         </div>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">18.2 Arbitration</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">19.2 Arbitration</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             Any disputes shall be resolved through binding arbitration under
             the rules of the American Arbitration Association. You waive the
@@ -1011,14 +1038,14 @@ export default function TermsPage() {
         </div>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">17.3 Small Claims</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">19.3 Small Claims</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             Either party may bring claims in small claims court if eligible.
           </p>
         </div>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">17.4 Attorneys' Fees</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">19.4 Attorneys' Fees</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             In any dispute arising under these Terms, the prevailing party shall
             be entitled to recover reasonable attorneys' fees, costs, and expenses
@@ -1030,7 +1057,7 @@ export default function TermsPage() {
         </div>
 
         <div className="ml-2 mt-4">
-          <h3 className="text-base font-semibold text-muted-foreground mb-3">17.5 Injunctive Relief</h3>
+          <h3 className="text-base font-semibold text-muted-foreground mb-3">19.5 Injunctive Relief</h3>
           <p className="text-sm leading-relaxed text-muted-foreground mb-3">
             Notwithstanding the arbitration provision, we may seek injunctive or
             other equitable relief in any court of competent jurisdiction to
@@ -1041,9 +1068,9 @@ export default function TermsPage() {
         </div>
       </section>
 
-      {/* 19. General Provisions */}
+      {/* 20. General Provisions */}
       <section id="general" className="mb-10 scroll-mt-24">
-        <h2 className="text-xl font-bold text-primary mb-4">19. General Provisions</h2>
+        <h2 className="text-xl font-bold text-primary mb-4">20. General Provisions</h2>
         <ul className="list-disc list-outside ml-5 space-y-1 text-sm leading-relaxed text-muted-foreground">
           <li>
             Entire Agreement: These Terms constitute the entire agreement between
@@ -1062,9 +1089,9 @@ export default function TermsPage() {
         </ul>
       </section>
 
-      {/* 20. Contact */}
+      {/* 21. Contact */}
       <section id="contact" className="mb-10 scroll-mt-24">
-        <h2 className="text-xl font-bold text-primary mb-4">20. Contact</h2>
+        <h2 className="text-xl font-bold text-primary mb-4">21. Contact</h2>
         <p className="text-sm leading-relaxed text-muted-foreground mb-3">For questions about these Terms:</p>
         <p className="text-sm leading-relaxed text-muted-foreground mb-3">
           Email:{' '}

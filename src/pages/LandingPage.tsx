@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 import { Vote, TrendingUp, Users, Trophy, Mail, Repeat, Shield, Scale, Gamepad2, ArrowRightLeft, Truck, Ban, Fingerprint, AlertTriangle, X, Infinity, Sparkles, Dices, CheckCircle, Swords, EyeOff } from 'lucide-react'
 import { useTheme } from '@/context/ThemeContext'
 
+// Flip to false to remove Riot integration screenshots from the marquee (API compliance)
+const SHOW_RIOT = true
+
 const FEATURES = [
   {
     icon: Repeat,
@@ -463,15 +466,19 @@ function GamertagPrivacyModal({ open, onClose }: { open: boolean; onClose: () =>
   )
 }
 
-const SCREENSHOTS = [
+const ALL_SCREENSHOTS = [
   { light: '/light-squad-feed.png', dark: '/dark-squad-feed.png', alt: 'Rally Squad Up feed with open party slots' },
   { light: '/light-home.png', dark: '/dark-home.png', alt: 'Rally home with active squads and hot topics' },
-  { light: '/light-profile.png', dark: '/dark-profile.png', alt: 'Rally profile with gamertag privacy, influence score, and level' },
+  { light: '/light-riot-squad.png', dark: '/dark-riot-squad.png', alt: 'League of Legends Squad Up with ranked stats and polls', riot: true },
+  { light: '/light-profile.png', dark: '/dark-profile.png', alt: 'Rally profile with gamertag privacy, influence score, and level', riot: true },
   { light: '/light-squad-create.png', dark: '/dark-squad-create.png', alt: 'Create a Squad Up call with game selection and gamertag' },
+  { light: '/light-riot-stats.png', dark: '/dark-riot-stats.png', alt: 'League of Legends player stats with top champions and match history', riot: true },
   { light: '/light-feed.png', dark: '/dark-feed.png', alt: 'Rally home feed with polls and hot topics' },
   { light: '/light-trade.png', dark: '/dark-trade.png', alt: 'Rally Game Trade marketplace with gamertag privacy' },
   { light: '/light-notifications.png', dark: '/dark-notifications.png', alt: 'Rally notifications with trade completions and courier requests' },
 ]
+
+const SCREENSHOTS = SHOW_RIOT ? ALL_SCREENSHOTS : ALL_SCREENSHOTS.filter(s => !s.riot)
 
 export default function LandingPage() {
   const [tradingModalOpen, setTradingModalOpen] = useState(false)
@@ -646,7 +653,7 @@ export default function LandingPage() {
           <div className="text-center mb-12">
             <img src={isDark ? '/logo-dark.png' : '/logo.png'} alt="Rally" className="w-10 h-10 mx-auto mb-4" />
             <h2 className="text-2xl font-bold text-foreground mb-3">
-              built for Gamers, by a Gamer
+              built for Gamers, by Gamers
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               A social hub, trading market, LFG — all in one app.

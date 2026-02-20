@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from '@/components/Layout'
 import LandingPage from '@/pages/LandingPage'
+import AboutPage from '@/pages/AboutPage'
 import FAQPage from '@/pages/FAQPage'
 import SupportPage from '@/pages/SupportPage'
 import PrivacyPage from '@/pages/PrivacyPage'
@@ -13,6 +14,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/faq" element={<FAQPage />} />
         <Route path="/support" element={<SupportPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />

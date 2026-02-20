@@ -1,20 +1,38 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Moon, Sun } from 'lucide-react'
+import { Menu, X, Moon, Sun, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useTheme } from '@/context/ThemeContext'
 
 const NAV_LINKS = [
+  { to: '/about', label: 'About' },
   { to: '/faq', label: 'FAQ' },
   { to: '/support', label: 'Support' },
+]
+
+const LEGAL_LINKS = [
   { to: '/privacy', label: 'Privacy' },
   { to: '/terms', label: 'Terms' },
 ]
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [legalOpen, setLegalOpen] = useState(false)
+  const [mobileLegalOpen, setMobileLegalOpen] = useState(false)
+  const legalRef = useRef<HTMLDivElement>(null)
   const { pathname } = useLocation()
   const { isDark, toggleTheme } = useTheme()
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (legalRef.current && !legalRef.current.contains(e.target as Node)) {
+        setLegalOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -24,7 +42,7 @@ export default function Header() {
           <span className="font-semibold text-lg text-primary">Rally</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-4">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.to}
@@ -37,6 +55,35 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
+          <div className="relative" ref={legalRef}>
+            <button
+              onClick={() => setLegalOpen(!legalOpen)}
+              className={cn(
+                'flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent',
+                LEGAL_LINKS.some((l) => pathname === l.to) ? 'text-accent' : 'text-muted-foreground'
+              )}
+            >
+              Legal
+              <ChevronDown size={14} className={cn('transition-transform', legalOpen && 'rotate-180')} />
+            </button>
+            {legalOpen && (
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-40 rounded-lg border border-border bg-background shadow-lg py-1">
+                {LEGAL_LINKS.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setLegalOpen(false)}
+                    className={cn(
+                      'block px-4 py-2 text-sm font-medium transition-colors hover:bg-muted',
+                      pathname === link.to ? 'text-accent' : 'text-muted-foreground hover:text-foreground'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-overlay transition-colors"
@@ -82,6 +129,37 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <button
+              onClick={() => setMobileLegalOpen(!mobileLegalOpen)}
+              className={cn(
+                'flex items-center justify-between py-2 px-3 rounded-lg text-sm font-medium transition-colors',
+                LEGAL_LINKS.some((l) => pathname === l.to)
+                  ? 'bg-muted text-accent'
+                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+              )}
+            >
+              Legal
+              <ChevronDown size={14} className={cn('transition-transform', mobileLegalOpen && 'rotate-180')} />
+            </button>
+            {mobileLegalOpen && (
+              <div className="flex flex-col gap-1 pl-4">
+                {LEGAL_LINKS.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => { setMenuOpen(false); setMobileLegalOpen(false) }}
+                    className={cn(
+                      'py-2 px-3 rounded-lg text-sm font-medium transition-colors',
+                      pathname === link.to
+                        ? 'bg-muted text-accent'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
           </nav>
         </div>
       )}
