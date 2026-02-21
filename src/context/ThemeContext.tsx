@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, useCallback, type ReactNode } from 'react'
 
 type Theme = 'light' | 'dark' | 'system'
 
@@ -10,6 +10,54 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
+
+function showThemeSplash(targetDark: boolean, onReady: () => void) {
+  const bg = targetDark ? '#000000' : '#ffffff'
+  const logoSrc = targetDark ? '/logo-dark.png' : '/logo.png'
+  const sheenColor = targetDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.1)'
+
+  const overlay = document.createElement('div')
+  overlay.style.cssText = `
+    position:fixed;inset:0;z-index:99999;
+    display:flex;align-items:center;justify-content:center;
+    background:${bg};opacity:0;transition:opacity 0.18s ease;
+  `
+
+  const wrapper = document.createElement('div')
+  wrapper.style.cssText = 'position:relative;overflow:hidden;border-radius:24px;'
+
+  const img = document.createElement('img')
+  img.src = logoSrc
+  img.alt = 'Rally'
+  img.width = 120
+  img.height = 120
+  img.style.display = 'block'
+
+  const sheen = document.createElement('div')
+  sheen.style.cssText = `
+    position:absolute;inset:0;
+    background:linear-gradient(105deg,transparent 40%,${sheenColor} 50%,transparent 60%);
+    animation:splash-sheen 1.4s ease-in-out 0.2s infinite;
+  `
+
+  wrapper.append(img, sheen)
+  overlay.appendChild(wrapper)
+  document.body.appendChild(overlay)
+
+  // Fade in
+  requestAnimationFrame(() => {
+    overlay.style.opacity = '1'
+  })
+
+  // Once opaque, apply the theme change and then fade out
+  setTimeout(() => {
+    onReady()
+    setTimeout(() => {
+      overlay.style.opacity = '0'
+      setTimeout(() => overlay.remove(), 200)
+    }, 350)
+  }, 200)
+}
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>(() => {
@@ -48,9 +96,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('rally-theme', t)
   }
 
-  const toggleTheme = () => {
-    setTheme(isDark ? 'light' : 'dark')
-  }
+  const toggleTheme = useCallback(() => {
+    const targetDark = !isDark
+    showThemeSplash(targetDark, () => {
+      setTheme(targetDark ? 'dark' : 'light')
+    })
+  }, [isDark])
 
   return (
     <ThemeContext.Provider value={{ theme, isDark, setTheme, toggleTheme }}>

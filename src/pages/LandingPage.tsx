@@ -242,7 +242,7 @@ function GetInTouchModal({ mounted, visible, onClose }: { mounted: boolean; visi
         <div className="border-b border-border px-6 py-4 flex items-center justify-between rounded-t-2xl">
           <div className="flex items-center gap-3">
             <Mail className="w-6 h-6 text-accent" />
-            <h2 className="text-lg font-bold text-foreground">Get Early Access</h2>
+            <h2 className="text-lg font-bold text-foreground">Early Access</h2>
           </div>
           <button onClick={handleClose} className="p-1 rounded-lg hover:bg-overlay transition-colors">
             <X className="w-5 h-5 text-muted-foreground" />
@@ -953,7 +953,7 @@ export default function LandingPage() {
             onClick={getInTouchModal.open}
             className="px-6 py-2.5 bg-accent text-accent-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
-            Get Early Access
+            Early Access
           </button>
           <Link
             to="/faq"
