@@ -24,7 +24,16 @@ export default function AboutPage() {
         </p>
         <p>
           This is a community project first and foremost. Rally grows with its players, and every decision
-          is made with the community in mind.
+          is made with the community in mind. If any rights holder feels their work is being used in a way
+          they're not comfortable with, please reach out and send a C&D. We will always respect your
+          copyright.
+        </p>
+        <p>
+          At the end of the day, it's a dream come true to create a super app for gamers that seamlessly
+          integrates with platform APIs and connects gamers across the world.
+        </p>
+        <p className="text-foreground font-medium mt-4">
+          Thanks,<br />John
         </p>
       </div>
     </div>

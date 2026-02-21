@@ -716,7 +716,7 @@ export default function LandingPage() {
     <div>
       {/* Hero */}
       <section className="max-w-5xl mx-auto px-4 pt-20 pb-16 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-red-500 text-sm font-medium mb-6 shadow-[0_0_12px_rgba(239,68,68,0.4)]">
           Closed Alpha
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-4">
@@ -835,7 +835,7 @@ export default function LandingPage() {
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                 Integrated blacklist cross-referenced on every sign-up. Device fingerprinting
                 and IP tracking catch ban evasion automatically. AI screening + human adjudicators
-                identify bad actors fast — zero tolerance, permanent bans.
+                identify bad actors fast with zero tolerance and permanent bans. Couriers act as trusted middlemen to verify and deliver items, so both sides of every trade are protected.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
@@ -846,6 +846,9 @@ export default function LandingPage() {
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
                   <Scale className="w-3 h-3" /> AI + Human Review
+                </span>
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
+                  <Truck className="w-3 h-3" /> Couriers
                 </span>
               </div>
             </div>
@@ -867,8 +870,8 @@ export default function LandingPage() {
                 Gamertag Privacy
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                Hide your gamertag from your public profile — it stays hidden everywhere across the app.
-                Trading and Squad Up still work seamlessly: squad leaders receive your gamertag via
+                Hide your gamertag from your public profile and it stays hidden everywhere across the app.
+                Trading and Squad Up still work seamlessly since squad leaders receive your gamertag via
                 notification when you join, and trade partners get it through PM or your assigned courier.
                 Full privacy, zero friction.
               </p>
@@ -902,7 +905,7 @@ export default function LandingPage() {
                 Squad Up
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                Post your game, invite friends or find randos, fill your squad in real time as you receive notifications with our seamless gamertag sharing system. Use custom/popular tags to quickly find those that fit your playstyle and objective.
+                Post your game, invite friends or find randos, and fill your squad in real time as you receive notifications with our seamless gamertag sharing system. Use custom and popular tags to quickly find players that fit your playstyle and objective. Squads auto-close when full and reopen if someone leaves, so there's always room for the right teammate.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">

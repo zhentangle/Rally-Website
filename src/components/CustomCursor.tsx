@@ -63,9 +63,98 @@ export default function CustomCursor() {
       cursor.style.opacity = '1'
     }
 
+    const playGunshot = () => {
+      const ctx = new AudioContext()
+      const t = ctx.currentTime
+
+      // Layer 1: Initial crack — bright, sharp noise burst
+      const crack = ctx.createBufferSource()
+      const crackBuf = ctx.createBuffer(1, ctx.sampleRate * 0.05, ctx.sampleRate)
+      const crackData = crackBuf.getChannelData(0)
+      for (let i = 0; i < crackData.length; i++) {
+        crackData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / crackData.length, 8)
+      }
+      crack.buffer = crackBuf
+      const crackGain = ctx.createGain()
+      crackGain.gain.setValueAtTime(0.6, t)
+      crackGain.gain.exponentialRampToValueAtTime(0.001, t + 0.04)
+      const crackFilter = ctx.createBiquadFilter()
+      crackFilter.type = 'highpass'
+      crackFilter.frequency.value = 1500
+      crack.connect(crackFilter).connect(crackGain).connect(ctx.destination)
+      crack.start(t)
+      crack.stop(t + 0.05)
+
+      // Layer 2: Bass thump — low oscillator hit
+      const bass = ctx.createOscillator()
+      bass.type = 'sine'
+      bass.frequency.setValueAtTime(150, t)
+      bass.frequency.exponentialRampToValueAtTime(30, t + 0.15)
+      const bassGain = ctx.createGain()
+      bassGain.gain.setValueAtTime(0.5, t)
+      bassGain.gain.exponentialRampToValueAtTime(0.001, t + 0.15)
+      bass.connect(bassGain).connect(ctx.destination)
+      bass.start(t)
+      bass.stop(t + 0.15)
+
+      // Layer 3: Tail — filtered noise decay
+      const tail = ctx.createBufferSource()
+      const tailBuf = ctx.createBuffer(1, ctx.sampleRate * 0.3, ctx.sampleRate)
+      const tailData = tailBuf.getChannelData(0)
+      for (let i = 0; i < tailData.length; i++) {
+        tailData[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / tailData.length, 2)
+      }
+      tail.buffer = tailBuf
+      const tailFilter = ctx.createBiquadFilter()
+      tailFilter.type = 'bandpass'
+      tailFilter.frequency.setValueAtTime(800, t)
+      tailFilter.frequency.exponentialRampToValueAtTime(200, t + 0.25)
+      tailFilter.Q.value = 1
+      const tailGain = ctx.createGain()
+      tailGain.gain.setValueAtTime(0.2, t)
+      tailGain.gain.exponentialRampToValueAtTime(0.001, t + 0.3)
+      tail.connect(tailFilter).connect(tailGain).connect(ctx.destination)
+      tail.start(t)
+      tail.stop(t + 0.3)
+
+      setTimeout(() => ctx.close(), 400)
+    }
+
+    const onClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (target.closest('a, button, [role="button"], input, select, textarea, summary')) return
+
+      playGunshot()
+
+      // Muzzle flash on crosshair
+      cursor.classList.add('cursor-flash')
+      setTimeout(() => cursor.classList.remove('cursor-flash'), 100)
+
+      // Screen shake
+      document.body.classList.remove('screen-shake')
+      void document.body.offsetWidth
+      document.body.classList.add('screen-shake')
+      setTimeout(() => document.body.classList.remove('screen-shake'), 150)
+
+      // Create bullet hole
+      const hole = document.createElement('div')
+      hole.className = 'bullet-hole'
+      hole.style.left = `${e.clientX}px`
+      hole.style.top = `${e.clientY + window.scrollY}px`
+      document.body.appendChild(hole)
+
+      setTimeout(() => {
+        hole.classList.add('bullet-hole-fade')
+      }, 2000)
+      setTimeout(() => {
+        hole.remove()
+      }, 3000)
+    }
+
     document.addEventListener('mousemove', onMouseMove)
     document.addEventListener('mouseover', onMouseOver)
     document.addEventListener('mouseout', onMouseOut)
+    document.addEventListener('click', onClick)
     document.documentElement.addEventListener('mouseleave', onMouseLeave)
     document.documentElement.addEventListener('mouseenter', onMouseEnter)
 
@@ -73,6 +162,7 @@ export default function CustomCursor() {
       document.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mouseover', onMouseOver)
       document.removeEventListener('mouseout', onMouseOut)
+      document.removeEventListener('click', onClick)
       document.documentElement.removeEventListener('mouseleave', onMouseLeave)
       document.documentElement.removeEventListener('mouseenter', onMouseEnter)
     }

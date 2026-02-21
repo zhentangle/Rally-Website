@@ -40,7 +40,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Rally. All rights reserved.
+            &copy; {new Date().getFullYear()} Rally.
           </p>
           <a
             href="mailto:support@rally.ink"
