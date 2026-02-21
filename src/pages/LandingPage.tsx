@@ -723,9 +723,7 @@ export default function LandingPage() {
           Play. Trade. Compete.
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-          Rally is the social app built for gamers. Trade in-game items through our
-          secure marketplace, predict real-world outcomes, and connect with a
-          community that plays as hard as you do.
+          Rally is the social media app built for gamers. Trade without getting scammed? Squad up within seconds? Level up and meet new people who play just like you!
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
