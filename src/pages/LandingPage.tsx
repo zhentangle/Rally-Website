@@ -720,7 +720,7 @@ export default function LandingPage() {
           Closed Alpha
         </div>
         <h1 className="text-4xl sm:text-5xl font-bold text-foreground leading-tight mb-4">
-          Play. Trade. Compete.
+          Play. Trade. Level Up.
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
           Rally is the social media app built for gamers. Trade without getting scammed? Squad up within seconds? Level up and meet new people who play just like you!
@@ -763,9 +763,6 @@ export default function LandingPage() {
 
       {/* App Screenshots — infinite marquee */}
       <section className="bg-surface-alt py-16 overflow-hidden relative">
-        <h2 className="text-2xl font-bold text-center text-foreground mb-10">
-          See Rally in action
-        </h2>
         <div
           className={`flex w-max animate-marquee ${magnifier?.active ? '[animation-play-state:paused]' : 'hover:[animation-play-state:paused]'}`}
         >
@@ -905,8 +902,7 @@ export default function LandingPage() {
                 Squad Up
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                Post your game, invite friends or find randoms, and fill your squad in real time.
-                Gamertags auto-shared, slots update live — no more scrambling for party invites.
+                Post your game, invite friends or find randos, fill your squad in real time as you receive notifications with our seamless gamertag sharing system. Use custom/popular tags to quickly find those that fit your playstyle and objective.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-overlay text-xs text-muted-foreground border border-border">
